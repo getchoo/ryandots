@@ -26,18 +26,20 @@
     forAllSystems = nixpkgs.lib.genAttrs systems;
     nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
   in {
-    homeConfigurations = forAllSystems (s: let
+    legacyPackages = forAllSystems (s: let
       pkgs = nixpkgsFor.${s};
     in {
-      ryan = homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations = {
+        ryan = homeManagerConfiguration {
+          inherit pkgs;
 
-        modules = [
-          ./home.nix
-        ];
+          modules = [
+            ./home.nix
+          ];
 
-        # lets you access inputs in home.nix
-        extraSpecialArgs = inputs;
+          # lets you access inputs in home.nix
+          extraSpecialArgs = inputs;
+        };
       };
     });
   };
