@@ -1,6 +1,6 @@
 _: {
   programs = {
     firefox.enable = true;
-    librewolf.enable = true;
+    #librewolf.enable = true;
   };
 }
